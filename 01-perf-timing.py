@@ -52,9 +52,20 @@ if __name__ == '__main__':
        n += n 
 
 """
-analysis:
+# analysis:
+unique_set is faster than unique_list, due to how each structure handles checks
+in a list, python checks elements one-by-one until it finds a match or reaches the end, so that takes time proportional to how many values have been seen so far - O(k)
+in a set, python hashes the number and jumps straight to the slot where it would be, which takes O(1) on average
 
-As n increases, the unique_list function gets noticeably slower than the unique_set one.
-I believe that this is because, for each seen number, a set will remove duplicates, and a list won't,
-meaning that checking the seen numbers is much faster when they're stored in a set.
+# hashing
+hashing lets a set check items without looking through everything.
+instead of comparing elements one at a time, a set decides in advance where each value is stored, so a lookup can go straight to that spot
+
+## step 1: a hash function turns a value into a number.
+a hash function takes a value and returns an integer; the same value always gives the same number.
+python has a built in hash function
+
+## step 2: the number picks a slot
+under the hood, a set is an array of slots. python takes the hash modulo the number of slots
+
 """
