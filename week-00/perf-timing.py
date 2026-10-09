@@ -67,5 +67,4 @@ python has a built in hash function
 
 ## step 2: the number picks a slot
 under the hood, a set is an array of slots. python takes the hash modulo the number of slots
-
 """
