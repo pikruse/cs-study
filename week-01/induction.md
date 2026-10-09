@@ -11,6 +11,7 @@ The proof is false because P(1) does not imply P(2). A single horse being one co
 # Task 2:
 Prove by ordinary induction that for every integer $n \leq 1$, $1^2 + 2^2 + \cdots + n^2 = \frac{n(n+1)(2n+1)}{6}$.
 
+## Answer:
 1. **The predicate $P(n)$**: we will prove $n \leq 1$, $1^2 + 2^2 + \cdots + n^2 = \frac{n(n+1)(2n+1)}{6}$ by induction.
 
 2. **The base case $P(0)$**: first, we will prove the base case. $0^2 = \frac{0(0+1)(0+1)}{6} = 0$. So, the base case holds.
