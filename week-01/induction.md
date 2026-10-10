@@ -75,3 +75,29 @@ $$
 This is exactly $P(n+1)$.
 
 **Conclusion.** $P(1)$ holds, and $P(n) \Rightarrow P(n+1)$ for every $n \geq 1$. By induction, $P(n)$ holds for all integers $n \geq 1$. $\blacksquare$
+
+---
+
+## Task 3: Product of Primes
+
+**Claim:** Every integer $n \geq 2$ is a product of primes. A prime on its own counts as a product of one prime.
+
+### Proof (strong induction)
+
+**Predicate:** Let $P(n)$ be the claim that every integer $n$ is a product of primes. That is, $n$ is the product of $p$ primes:
+
+$$
+n = p_1 \cdot p_2 \cdots p_r
+$$
+
+for some $r \geq 1$ and primes $p_1, ..., p_r$.
+
+**Base Case P(2):** We will show that 2 is a product of primes. Assume $n = 2$ is not prime. Then, 2 can be written as $2 = a \cdot b$, with $1 < a < 2$ and $1 < b < 2$ and $a, b \in \mathbb{Z}$. However, there are no integers between $1$ and $2$, so $2$ cannot be written this way. Therefore, $n=2$ must be prime. So 2 is a product of one prime, and $P(2)$ holds.
+
+**Strong Inductive Hypothesis:** Assume that $P(m)$ holds for every $m$ with $2 \leq m \leq k$. $m$ is the product of primes:
+
+$$
+m = p_1 \cdot p_2 \cdots p_r
+$$
+
+for some $r \geq 1$ and primes $p_1, ..., p_r$. 
