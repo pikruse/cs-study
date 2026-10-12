@@ -77,8 +77,63 @@ This is exactly $P(n+1)$.
 **Conclusion.** $P(1)$ holds, and $P(n) \Rightarrow P(n+1)$ for every $n \geq 1$. By induction, $P(n)$ holds for all integers $n \geq 1$. $\blacksquare$
 
 ---
+## Task 3: Postage combinations
 
-## Task 3: Product of Primes
+**Claim.** Prove that for every postage cost $n \geq 12$, there is some combination of stamps that adds to $n$.
+
+### Proof (ordinary induction)
+
+**Predicate.** Let $P(n)$ be the statement: there exist integers $a, b \geq 0$ such that 
+
+$$
+n = 7a + 3b
+$$
+
+**Base case, $P(12)$.** Let $n=12$. Then $12 = 7 \cdot 0 + 3 \cdot 4$. So there exists a combination $12 = 7a + 3b$, and the base case is true.
+
+**Inductive hypothesis.** Assume $P(n)$ for some $n \geq 12$, so 
+
+$$
+n = 7a + 3b
+$$
+
+for some $a, b \geq 0$.
+
+**Inductive step, $P(n) \Rightarrow P(n+1)$.** We want to show
+
+$$
+n + 1 = 7c + 3d
+$$
+
+for some integers $c, d \geq 0$. There are two cases that we must consider. First, consider the case where $n+1$ is divisible by 3. Then, 
+
+$$
+n + 1 = 7 \cdot 0 + 3(\frac{n+1}{3}).
+$$
+
+In this case, we set $c = 0$, which satisfies $c \geq 0$, and $d = \frac{n+1}{3}$. $d \geq 0$ since $n \geq 12$ and must be divisble by 3. Therefore, for the first case, we have shown that $P(n+1)$ can be written as
+
+$$
+n + 1 = 7c + 3d.
+$$
+
+Now, consider the second case, where $n+1$ is not divisible by 3. Then
+
+$$
+n+1 = 7(a+1) + 3(b-2).
+$$
+
+Let $a+1=c$ and $b-2=d$. Since $a = 0$ in the base case and $b = 4$, $c, d \geq 0$. Therefore, the second case can be written in the form
+
+$$
+n + 1 = 7c + 3d.
+$$
+
+**Conclusion.** $P(1)$ holds, and $P(n) \Rightarrow P(n+1)$ for every $n \geq 1$. By induction, $P(n)$ holds for all integers $n \geq 1$. $\blacksquare$ 
+
+---
+
+## Task 4: Product of Primes
 
 **Claim:** Every integer $n \geq 2$ is a product of primes. A prime on its own counts as a product of one prime.
 
@@ -94,7 +149,7 @@ for some $r \geq 1$ and primes $p_1, ..., p_r$.
 
 **Base Case P(2):** We will show that 2 is a product of primes. Assume $n = 2$ is not prime. Then, 2 can be written as $2 = a \cdot b$, with $1 < a < 2$ and $1 < b < 2$ and $a, b \in \mathbb{Z}$. However, there are no integers between $1$ and $2$, so $2$ cannot be written this way. Therefore, $n=2$ must be prime. So 2 is a product of one prime, and $P(2)$ holds.
 
-**Strong Inductive Hypothesis:** Assume that $P(m)$ holds for every $m$ with $2 \leq m \leq k$. $m$ is the product of primes:
+**Strong Inductive Hypothesis:** Fix some $k \geq 2$, and assume that $P(m)$ holds for every $m$ with $2 \leq m \leq k$. $m$ is the product of primes:
 
 $$
 m = p_1 \cdot p_2 \cdots p_r
