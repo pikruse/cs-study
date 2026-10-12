@@ -105,31 +105,32 @@ $$
 n + 1 = 7c + 3d
 $$
 
-for some integers $c, d \geq 0$. There are two cases that we must consider. First, consider the case where $n+1$ is divisible by 3. Then, 
+for some integers $c, d \geq 0$. There are two cases that we must consider. First, consider the case where $b \geq 2$. Then 
 
 $$
-n + 1 = 7 \cdot 0 + 3(\frac{n+1}{3}).
+n + 1 = 7(a + 1) + 3(b - 2).
 $$
 
-In this case, we set $c = 0$, which satisfies $c \geq 0$, and $d = \frac{n+1}{3}$. $d \geq 0$ since $n \geq 12$ and must be divisble by 3. Therefore, for the first case, we have shown that $P(n+1)$ can be written as
+$c = a + 1$ and $d = b - 2$, both of which are $\geq 2$. Next, consider the case where $b \leq 1$. Then
 
 $$
-n + 1 = 7c + 3d.
+n + 1 = 7(a - 2) + 3(b + 5)$.
 $$
 
-Now, consider the second case, where $n+1$ is not divisible by 3. Then
+Since $0 \leq b \leq 1$, $b+5=d \geq 0$. However, we must show that $a - 2 \geq 0$, or $2 \geq a$. We know $b \leq 1 = 3b \leq 3$, and $n \leq 12$. Given this,
 
 $$
-n+1 = 7(a+1) + 3(b-2).
+\begin{aligned}
+n &= 7a + 3b \\
+7a &= n - 3b \\
+  &\geq 12-3 \\
+  &=9. 
+\end{aligned}
 $$
 
-Let $a+1=c$ and $b-2=d$. Since $a = 0$ in the base case and $b = 4$, $c, d \geq 0$. Therefore, the second case can be written in the form
+So $7a \geq 9$, and therefore $a \geq \frac{9}{7} > 1$. Since $a$ must be an integer, we know $a \geq 2$. Let $c = a-2$ and $d = b+5$, both of which are $\geq 0$. so $P(n+1)$ holds.
 
-$$
-n + 1 = 7c + 3d.
-$$
-
-**Conclusion.** $P(1)$ holds, and $P(n) \Rightarrow P(n+1)$ for every $n \geq 1$. By induction, $P(n)$ holds for all integers $n \geq 1$. $\blacksquare$ 
+**Conclusion.** $P(1)$ holds, and $P(n) \Rightarrow P(n+1)$ for every $n \geq 12$. By induction, $P(n)$ holds for all integers $n \geq 12$. $\blacksquare$ 
 
 ---
 
