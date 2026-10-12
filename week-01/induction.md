@@ -79,58 +79,63 @@ This is exactly $P(n+1)$.
 ---
 ## Task 3: Postage combinations
 
-**Claim.** Prove that for every postage cost $n \geq 12$, there is some combination of stamps that adds to $n$.
+**Claim.** Using 3¢ and 7¢ stamps, every postage cost $n \geq 12$ can be paid exactly.
 
 ### Proof (ordinary induction)
 
-**Predicate.** Let $P(n)$ be the statement: there exist integers $a, b \geq 0$ such that 
+**Predicate.** Let $P(n)$ be the statement: there exist integers $a, b \geq 0$ such that
+
+$$
+n = 7a + 3b.
+$$
+
+**Base case, $P(12)$.** $12 = 7 \cdot 0 + 3 \cdot 4$, so $P(12)$ holds with $a = 0$ and $b = 4$.
+
+**Inductive hypothesis.** Assume $P(n)$ holds for some $n \geq 12$, so
 
 $$
 n = 7a + 3b
 $$
 
-**Base case, $P(12)$.** Let $n=12$. Then $12 = 7 \cdot 0 + 3 \cdot 4$. So there exists a combination $12 = 7a + 3b$, and the base case is true.
+for some integers $a, b \geq 0$.
 
-**Inductive hypothesis.** Assume $P(n)$ for some $n \geq 12$, so 
-
-$$
-n = 7a + 3b
-$$
-
-for some $a, b \geq 0$.
-
-**Inductive step, $P(n) \Rightarrow P(n+1)$.** We want to show
+**Inductive step, $P(n) \Rightarrow P(n+1)$.** We want to show that
 
 $$
 n + 1 = 7c + 3d
 $$
 
-for some integers $c, d \geq 0$. There are two cases that we must consider. First, consider the case where $b \geq 2$. Then 
+for some integers $c, d \geq 0$. Since $b$ is a nonnegative integer, either $b \geq 2$ or $b \leq 1$, so there are two cases.
+
+*Case 1: $b \geq 2$.* Trade two 3¢ stamps for one 7¢ stamp:
 
 $$
 n + 1 = 7(a + 1) + 3(b - 2).
 $$
 
-$c = a + 1$ and $d = b - 2$, both of which are $\geq 2$. Next, consider the case where $b \leq 1$. Then
+Let $c = a + 1$ and $d = b - 2$. Since $a \geq 0$, $c \geq 1$, and since $b \geq 2$, $d \geq 0$. So $P(n+1)$ holds.
+
+*Case 2: $b \leq 1$.* Trade two 7¢ stamps for five 3¢ stamps:
 
 $$
-n + 1 = 7(a - 2) + 3(b + 5)$.
+n + 1 = 7(a - 2) + 3(b + 5).
 $$
 
-Since $0 \leq b \leq 1$, $b+5=d \geq 0$. However, we must show that $a - 2 \geq 0$, or $2 \geq a$. We know $b \leq 1 = 3b \leq 3$, and $n \leq 12$. Given this,
+Let $c = a - 2$ and $d = b + 5$. Since $b \geq 0$, $d \geq 5$. It remains to show that $c \geq 0$, that is, $a \geq 2$. Since $b \leq 1$, we have $3b \leq 3$, and $n \geq 12$ by the inductive hypothesis. Therefore
 
 $$
 \begin{aligned}
-n &= 7a + 3b \\
 7a &= n - 3b \\
-  &\geq 12-3 \\
-  &=9. 
+   &\geq 12 - 3 \\
+   &= 9,
 \end{aligned}
 $$
 
-So $7a \geq 9$, and therefore $a \geq \frac{9}{7} > 1$. Since $a$ must be an integer, we know $a \geq 2$. Let $c = a-2$ and $d = b+5$, both of which are $\geq 0$. so $P(n+1)$ holds.
+so $a \geq \frac{9}{7} > 1$. Since $a$ is an integer, $a \geq 2$, and so $c \geq 0$. So $P(n+1)$ holds.
 
-**Conclusion.** $P(1)$ holds, and $P(n) \Rightarrow P(n+1)$ for every $n \geq 12$. By induction, $P(n)$ holds for all integers $n \geq 12$. $\blacksquare$ 
+In either case, $P(n+1)$ holds.
+
+**Conclusion.** $P(12)$ holds, and $P(n) \Rightarrow P(n+1)$ for every $n \geq 12$. By induction, $P(n)$ holds for all integers $n \geq 12$. $\blacksquare$
 
 ---
 
