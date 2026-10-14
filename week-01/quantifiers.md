@@ -1,7 +1,7 @@
 # Quantifiers
----
+
 ## Task 1:
-1. Write the following claims as $\forall n \geq __, P(n)$, and write $P(n)$ in full with every variable introduced with a quantifier:
+1. Write the following claims as $\forall n \geq \__, P(n)$, and write $P(n)$ in full with every variable introduced with a quantifier:
    * Every integer $n \geq 12$ can be paid exactly with 3c and 7c stamps. 
      * **rewrite:** $\forall$ integers $n \geq 12$, $\exists$ some integers $a,b \geq 0$ such that $n = 3a + 7b$.
      * **claim:** $\forall n \geq 12, P(n)$.
@@ -17,7 +17,6 @@
     
 3. What quantifier is TwoSum searching for, and why can it stop at the first match?
    * two sum is searching for an existential quantifier, $\exists$. It can stop once it finds a single example, because it knows that a single true case exists, and proving all cases (as in $\forall$) is not required.
-
 ---
 
 ## Task 2:
@@ -50,3 +49,49 @@ $$
 Let $q = (2k^2 + 3k + 1)$. Since $k$ is an integer, $q$ must also be an integer. So, there exists an integer $q$ such that $n^2+n = 2q$. Therefore when $n$ is odd, $n^2+n$ is even. 
 
 **Conclusion.** In both cases, $n^2+n$ is even. Therefore, for all integers $n$, $n^2+n$ is even. $\blacksquare$
+---
+
+## Task 3: 
+
+**Predicate.** For every integer $n$ $n^2$ leaves a remainder of 0 or 1 when divided by 3. That is, $\forall n \in \mathbb{Z}$, $\exists k \in \mathbb{Z}$ such that $n^2 = 3k+0$ or $3k+1$.
+
+**Cases.** There are 3 cases we will consider: $\frac{n}{3}$ has a remainder of 0, 1, or 2. Since all integers $n$ leave a remainder of either 0, 1, or 2 when divided by 3, these cases cover all integers $n$
+
+**Case 1.** $\frac{n}{3}$ has a remainder of 0. Assume $\frac{n}{3}$ has a remainder of 0. Then $\exists$ some integer $q$ such that $n$ can be written in the form $n=3q$. So
+
+$$
+\begin{aligned}
+n^2 &= (3q)^2 \\
+  &= 9q^2 \\
+  &=3(3q^2). \\ 
+\end{aligned}
+$$
+
+Let $3q^2 = k$. Since $q$ is an integer, then $k$ is also an integer. So, $\exists k \in \mathbb{Z}$ such that $n^2 = 3k$, and case 1 is true.
+
+**Case 2.** $\frac{n}{3}$ has a remainder of 1. Assume $\frac{n}{3}$ has a remainder of 1. Then $\exists$ some integer $q$ such that $n$ can be written in the form $n=3q + 1$. So
+$$
+\begin{aligned}
+n^2 &= (3q+1)^2 \\
+  &= 9q^2 + 6q + 1 \\
+  &= (9q^2 + 6q) + 1 \\
+  &= 3(3q^2 + 2q) + 1. \\
+\end{aligned}
+$$ 
+
+Let $3q^2 + 2q = k$. Since $q$ is an integer, $k$ is also an integer. So $\exists k \in \mathbb{Z}$ such that $n^2 = 3k + 1$, and case 2 is true.
+
+**Case 3.** $\frac{n}{3}$ has a remainder of 2. Assume $\frac{n}{3}$ has a remainder of 2. Then $\exists$ some integer $q$ such that $n$ can be written in the form $n=3q + 2$. so
+$$
+\begin{aligned}
+n^2 &= (3q + 2)^2 \\
+  &= 9q^2 + 6q + 4 \\
+  & = 9q^2 + 6q + 3 + 1 \\
+  &= (9q^2 + 6q + 3) + 1 \\
+  &= 3(3q^2 + 2q + 1) + 1. \\
+\end{aligned}
+$$
+
+Let $3q^2 + 2q + 1 = k$. Since $q$ is an integer, $k$ is also an integer. So $\exists k \in \mathbb{Z}$ such that $n^2 = 3k + 1$, and case 3 is true.
+
+**Conclusion.** Since all 3 cases are true, $\forall n \in \mathbb{Z}$, $\exists k \in \mathbb{Z}$ such that $n^2 = 3k+0$ or $3k+1$. Therefore $\forall n \in \mathbb{Z}$, $n^2$ leaves a remainder of 0 or 1 when divided by 3. $\blacksquare$  
