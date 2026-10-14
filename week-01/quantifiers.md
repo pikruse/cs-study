@@ -24,7 +24,7 @@ For every integer $n$, $n^2 + n$ is even.
 
 **Definitions.** $n$ is even means there exists some integer $k$ such that $n = 2k$. $n$ is odd means there exists some integer $k$ such that $n = 2k+1$.
 
-**Case Coverage.** Every integer $n$ can be written as $n=2k+r$, where $k$ is an integer and $r = 0$ or $1$ (by the quotient-remainder theorem). If $r=0$, then $n$ is even, and if $r=1$, then $n$ is odd. So all integers $n$ must be even or odd.
+**Case Coverage.** Every integer $n$ can be written as $n=2k+r$, where $k$ is an integer and $r = 0$ or $1$ by the quotient-remainder theorem (QRT). If $r=0$, then $n$ is even, and if $r=1$, then $n$ is odd. So all integers $n$ must be even or odd.
 
 **Case 1: n is even.** Assume $n$ is even. Then there exists some integer $k$ such that $n=2k$. So
 $$
@@ -51,13 +51,16 @@ Let $q = (2k^2 + 3k + 1)$. Since $k$ is an integer, $q$ must also be an integer.
 **Conclusion.** In both cases, $n^2+n$ is even. Therefore, for all integers $n$, $n^2+n$ is even. $\blacksquare$
 ---
 
-## Task 3: 
+## Task 3:
 
-**Predicate.** For every integer $n$ $n^2$ leaves a remainder of 0 or 1 when divided by 3. That is, $\forall n \in \mathbb{Z}$, $\exists k \in \mathbb{Z}$ such that $n^2 = 3k+0$ or $3k+1$.
+### Proof 3.1
+Prove that for every integer $n$, $n^2$ leaves a remainder of 0 or 1 when divided by 3.
 
-**Cases.** There are 3 cases we will consider: $\frac{n}{3}$ has a remainder of 0, 1, or 2. Since all integers $n$ leave a remainder of either 0, 1, or 2 when divided by 3, these cases cover all integers $n$
+**Claim.** For every integer $n$, $n^2$ leaves a remainder of 0 or 1 when divided by 3. That is, $\forall n \in \mathbb{Z}$, $\exists k \in \mathbb{Z}$ such that $n^2 = 3k+0$ or $n^2 = 3k+1$.
 
-**Case 1.** $\frac{n}{3}$ has a remainder of 0. Assume $\frac{n}{3}$ has a remainder of 0. Then $\exists$ some integer $q$ such that $n$ can be written in the form $n=3q$. So
+**Cases.** There are 3 cases we will consider: $n$ divided by 3 has a remainder of 0, 1, or 2. Since all integers $n$ leave a remainder of either 0, 1, or 2 when divided by 3 by the QRT, these cases cover all integers $n$.
+
+**Case 1.** Suppose $n$ leaves a remainder of 0 when divided by 3, so $n = 3q$ for some integer $q$. So
 
 $$
 \begin{aligned}
@@ -69,7 +72,7 @@ $$
 
 Let $3q^2 = k$. Since $q$ is an integer, then $k$ is also an integer. So, $\exists k \in \mathbb{Z}$ such that $n^2 = 3k$, and case 1 is true.
 
-**Case 2.** $\frac{n}{3}$ has a remainder of 1. Assume $\frac{n}{3}$ has a remainder of 1. Then $\exists$ some integer $q$ such that $n$ can be written in the form $n=3q + 1$. So
+**Case 2.** Suppose $n$ leaves a remainder of 1 when divided by 3, so $n = 3q + 1$ for some integer $q$. So
 $$
 \begin{aligned}
 n^2 &= (3q+1)^2 \\
@@ -81,17 +84,65 @@ $$
 
 Let $3q^2 + 2q = k$. Since $q$ is an integer, $k$ is also an integer. So $\exists k \in \mathbb{Z}$ such that $n^2 = 3k + 1$, and case 2 is true.
 
-**Case 3.** $\frac{n}{3}$ has a remainder of 2. Assume $\frac{n}{3}$ has a remainder of 2. Then $\exists$ some integer $q$ such that $n$ can be written in the form $n=3q + 2$. so
+**Case 3.** Suppose $n$ leaves a remainder of 2 when divided by 3, so $n = 3q + 2$ for some integer $q$. So
 $$
 \begin{aligned}
 n^2 &= (3q + 2)^2 \\
-  &= 9q^2 + 6q + 4 \\
-  & = 9q^2 + 6q + 3 + 1 \\
-  &= (9q^2 + 6q + 3) + 1 \\
-  &= 3(3q^2 + 2q + 1) + 1. \\
+  &= 9q^2 + 12q + 4 \\
+  & = 9q^2 + 12q + 3 + 1 \\
+  &= (9q^2 + 12q + 3) + 1 \\
+  &= 3(3q^2 + 4q + 1) + 1. \\
 \end{aligned}
 $$
 
-Let $3q^2 + 2q + 1 = k$. Since $q$ is an integer, $k$ is also an integer. So $\exists k \in \mathbb{Z}$ such that $n^2 = 3k + 1$, and case 3 is true.
+Let $3q^2 + 4q + 1 = k$. Since $q$ is an integer, $k$ is also an integer. So $\exists k \in \mathbb{Z}$ such that $n^2 = 3k + 1$, and case 3 is true.
 
-**Conclusion.** Since all 3 cases are true, $\forall n \in \mathbb{Z}$, $\exists k \in \mathbb{Z}$ such that $n^2 = 3k+0$ or $3k+1$. Therefore $\forall n \in \mathbb{Z}$, $n^2$ leaves a remainder of 0 or 1 when divided by 3. $\blacksquare$  
+**Conclusion.** Since all 3 cases are true, $\forall n \in \mathbb{Z}$, $\exists k \in \mathbb{Z}$ such that $n^2 = 3k+0$ or $n^2 = 3k+1$. Therefore $\forall n \in \mathbb{Z}$, $n^2$ leaves a remainder of 0 or 1 when divided by 3. $\blacksquare$  
+
+### Corollary 3.2
+No integer of the form $3m+2$ is a perfect square.
+
+Suppose, for contradiction, that $N=3m+2$ is a perfect square for some integer $m$, so $N = n^2$ for some integer $n$. By Proof 3.1, $n^2 = 3k + r$ for some integer $k$ and some $r \in \{0, 1\}$. So $N$ leaves a remainder of 2 and also remainder $r \neq 2$ when divided by 3. This is a contradiction because remainders are unique based on the QRT, so we can conclude that no integer of the form $3m+2$ is a perfect square. $\blacksquare$
+
+## Task 4:
+Prove that $\sqrt 2$ is irrational.
+
+### Lemma 4.1
+For every integer $a$, if $a^2$ is even, then $a$ is even. We will prove the contrapositive: if $a$ is not even, then $a^2$ is not even. By the QRT, every integer is either even or odd, and not both, so "not even" means "odd." So we must show that if $a$ is odd, then $a^2$ is odd.
+
+Assume $a$ is odd. That means $\exists k \in \mathbb{Z}$ such that $a = 2k+1$. So 
+
+$$
+\begin{aligned} 
+a^2 &= (2k+1)^2 \\
+  &= 4k^2 + 4k + 1 \\
+  &= (4k^2 + 4k) + 1 \\
+  &= 2(2k^2 + 2k) + 1. \\
+\end{aligned}
+$$
+
+Let $p = 2k^2 + 2k$. Since $k$ is an integer, $p$ is also an integer. So $\exists p \in \mathbb{Z}$ such that $a^2 = 2p + 1$, so $a^2$ is odd by the definition of odd. So when $a$ is odd, $a^2$ is also odd. Taking the contrapositive of this statement, we know that if $a^2$ is even, then $a$ is also even. $\blacksquare$
+
+### Proof 4.2
+We will prove that $\sqrt 2$ is irrational by contradiction. Assume $\sqrt 2$ is rational. That is, $\exists a,b \in \mathbb{Z}$, with $b \neq 0$, such that $\sqrt 2 = \frac{a}{b}$, and the fraction is in lowest terms (any fraction can be reduced to lowest terms), so $a$ and $b$ share no common factor. So
+
+$$
+\begin{aligned}
+\sqrt 2 &= \frac{a}{b} \\
+2 &= (\frac{a}{b})^2 \\
+2 &= \frac{a^2}{b^2}\\
+2b^2 &= a^2.\\ 
+\end{aligned}
+$$
+
+Let $p = b^2$. Since $b$ is an integer, $p$ is also an integer. So $a^2 = 2p$ for some integer $p$. By definition, $a^2$ is even. By Lemma 4.1, since $a^2$ is even, $a$ is also even. So $a = 2k$ for some integer $k$. Substituting $a = 2k$ into $2b^2 = a^2$ yields
+
+$$
+\begin{aligned}
+2b^2 &= (2k)^2 \\
+2b^2 &= 4k^2 \\
+b^2 &= 2k^2. \\
+\end{aligned}
+$$
+
+Let $q = k^2$. Since $k$ is an integer, $q$ is also an integer. So $b^2 = 2q$ for some integer $q$. By definition, $b^2$ is even. By Lemma 4.1, since $b^2$ is even, $b$ is also even. Since $a$ and $b$ are both even, they share a common factor of 2. Therefore, $\frac{a}{b}$ is not in lowest terms. This is a contradiction, since we assumed that the fraction was in lowest terms. Therefore, we can conclude that $\sqrt 2$ is irrational. $\blacksquare$
