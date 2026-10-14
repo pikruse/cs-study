@@ -1,5 +1,6 @@
 import random
 
+# check quantifiers task 1
 def has_pair(nums, t):
     # there exists an i < j such that nums[i] + nums[j] == t
     return any(nums[i] + nums[j] == t
@@ -20,5 +21,12 @@ for _ in range(1000):
     t = random.randint(-10, 10)
     assert (not has_pair(nums, t)) == not_has_pair(nums, t)
 
-print("negation checks passed on 1,000 random lists")
+print("Task 1: negation checks passed on 1,000 random lists")
+
+# check quantifiers task 3
+for n in range(-1_000, 1_000):
+    assert n**2 % 3 in (0,1)
+print("Task 3: remainder checks passed for all n from -1,000 to 1,000")
+
+
 
