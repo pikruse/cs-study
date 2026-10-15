@@ -49,6 +49,7 @@ $$
 Let $q = (2k^2 + 3k + 1)$. Since $k$ is an integer, $q$ must also be an integer. So, there exists an integer $q$ such that $n^2+n = 2q$. Therefore when $n$ is odd, $n^2+n$ is even. 
 
 **Conclusion.** In both cases, $n^2+n$ is even. Therefore, for all integers $n$, $n^2+n$ is even. $\blacksquare$
+
 ---
 
 ## Task 3:
@@ -104,6 +105,8 @@ No integer of the form $3m+2$ is a perfect square.
 
 Suppose, for contradiction, that $N=3m+2$ is a perfect square for some integer $m$, so $N = n^2$ for some integer $n$. By Proof 3.1, $n^2 = 3k + r$ for some integer $k$ and some $r \in \{0, 1\}$. So $N$ leaves a remainder of 2 and also remainder $r \neq 2$ when divided by 3. This is a contradiction because remainders are unique based on the QRT, so we can conclude that no integer of the form $3m+2$ is a perfect square. $\blacksquare$
 
+---
+
 ## Task 4:
 Prove that $\sqrt 2$ is irrational.
 
@@ -146,3 +149,41 @@ b^2 &= 2k^2. \\
 $$
 
 Let $q = k^2$. Since $k$ is an integer, $q$ is also an integer. So $b^2 = 2q$ for some integer $q$. By definition, $b^2$ is even. By Lemma 4.1, since $b^2$ is even, $b$ is also even. Since $a$ and $b$ are both even, they share a common factor of 2. Therefore, $\frac{a}{b}$ is not in lowest terms. This is a contradiction, since we assumed that the fraction was in lowest terms. Therefore, we can conclude that $\sqrt 2$ is irrational. $\blacksquare$
+
+---
+
+## Task 5
+
+### Proof 5.1
+$0 + 1 + \dots + n = \frac{n(n+1)/2} \forall n \geq 0$.
+
+**Predicate.**  Let $P(n) = 0 + 1 + \dots + n = \frac{n(n+1)}{2} \forall n \geq 0$. 
+
+**Base Case.** $P(0) = 0 = \frac{0(0+1)}{2}$, which is true. The base case holds
+
+**Inductive Hypothesis.** Assuming $P(n)$, we will prove $P(n+1)$:
+
+$$
+\begin{aligned}
+0 + 1 + \dots + n + (n + 1) &= \frac{(n+1)((n+1)+1)}{2}.
+\end{aligned}
+$$
+
+**Inductive Step.** Assume $P(n)$ is true. Then adding $(n+1)$ to both sides yields:
+
+$$
+\begin{aligned}
+0 + 1 + \dots + n + (n + 1) &= \frac{n(n+1)}{2} + (n+1)\\
+  & = \frac{n^2 + n}{2} + \frac{2n + 2}{2} \\
+  &= \frac{n^2 + 3n + 2}{2} \\
+  &= \frac{(n+1)(n+2)}{2} \\
+  &= \frac{(n+1)((n+1)+1)}{2}. \\
+\end{aligned}
+$$
+
+So, $P(n+1)$ is true.
+
+**Conclusion.** Since $P(n) \Rightarrow P(n+1) \forall n \geq 0$, $0 + 1 + \dots + n = \frac{n(n+1)/2} \forall n \geq 0$ by induction. $\blacksquare$
+
+### Corollary 5.2
+Given a set $N = \{0, 1, \cdots, n\}$ missing some entry $m$, the function $\frac{n(n+1)}{2} - \Sum^n N = m$. From Proof 5.2, we know $\frac{n(n+1)/2} = 0 + 1 + \dots + n \forall n \geq 0$. Let $N = \{0, 1, \cdots, n\}$. Then $\frac{n(n+1)/2} = \Sum_^n N$. Removing a value $m$ from the set is equivalent to subtracting it from the set's sum: $\frac{n(n+1)/2} = \Sum_^n N - m$. Algebra yields $\frac{n(n+1)}{2} - \Sum^n N = m$. So, given a set $N = \{0, 1, \cdots, n\}$ missing some entry $m$, the function $\frac{n(n+1)}{2} - \Sum^n N = m$. 
