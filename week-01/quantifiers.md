@@ -155,13 +155,13 @@ Let $q = k^2$. Since $k$ is an integer, $q$ is also an integer. So $b^2 = 2q$ fo
 ## Task 5
 
 ### Proof 5.1
-$0 + 1 + \dots + n = \frac{n(n+1)/2} \forall n \geq 0$.
+**Claim.** For all $n \geq 0$, $0 + 1 + \dots + n = \frac{n(n+1)}{2}$.
 
-**Predicate.**  Let $P(n) = 0 + 1 + \dots + n = \frac{n(n+1)}{2} \forall n \geq 0$. 
+**Predicate.** $P(n)$: $0 + 1 + \dots + n = \frac{n(n+1)}{2}$.
 
-**Base Case.** $P(0) = 0 = \frac{0(0+1)}{2}$, which is true. The base case holds
+**Base Case.** For $n = 0$, the left side is $0$ and the right side is $\frac{0(0+1)}{2} = 0$, so $P(0)$ holds.
 
-**Inductive Hypothesis.** Assuming $P(n)$, we will prove $P(n+1)$:
+**Inductive Hypothesis.** Assume $P(n)$ holds for some arbitrary $n \geq 0$. We will prove $P(n+1)$:
 
 $$
 \begin{aligned}
@@ -169,7 +169,7 @@ $$
 \end{aligned}
 $$
 
-**Inductive Step.** Assume $P(n)$ is true. Then adding $(n+1)$ to both sides yields:
+**Inductive Step.** Adding $(n+1)$ to both sides of $P(n)$ yields:
 
 $$
 \begin{aligned}
@@ -183,7 +183,53 @@ $$
 
 So, $P(n+1)$ is true.
 
-**Conclusion.** Since $P(n) \Rightarrow P(n+1) \forall n \geq 0$, $0 + 1 + \dots + n = \frac{n(n+1)/2} \forall n \geq 0$ by induction. $\blacksquare$
+**Conclusion.** Since $P(0)$ holds and $P(n) \Rightarrow P(n+1)$ for all $n \geq 0$, $0 + 1 + \dots + n = \frac{n(n+1)}{2}$ for all $n \geq 0$ by induction. $\blacksquare$
 
 ### Corollary 5.2
-Given a set $N = \{0, 1, \cdots, n\}$ missing some entry $m$, the function $\frac{n(n+1)}{2} - \Sum^n N = m$. From Proof 5.2, we know $\frac{n(n+1)/2} = 0 + 1 + \dots + n \forall n \geq 0$. Let $N = \{0, 1, \cdots, n\}$. Then $\frac{n(n+1)/2} = \Sum_^n N$. Removing a value $m$ from the set is equivalent to subtracting it from the set's sum: $\frac{n(n+1)/2} = \Sum_^n N - m$. Algebra yields $\frac{n(n+1)}{2} - \Sum^n N = m$. So, given a set $N = \{0, 1, \cdots, n\}$ missing some entry $m$, the function $\frac{n(n+1)}{2} - \Sum^n N = m$. 
+Let $A = \{0, 1, \dots, n\}$, and let $S$ be $A$ with some entry $m$ removed. Then $\frac{n(n+1)}{2} - \sum_{x \in S} x = m$.
+
+Since $S$ is $A$ with $m$ removed, $\sum_{x \in S} x = \sum_{x \in A} x - m$. From Proof 5.1, we know $\sum_{x \in A} x = 0 + 1 + \dots + n = \frac{n(n+1)}{2}$ for all $n \geq 0$. So $\sum_{x \in S} x = \frac{n(n+1)}{2} - m$. Then, by algebra, $\frac{n(n+1)}{2} - \sum_{x \in S} x = m$. $\blacksquare$
+
+---
+
+## Task 6
+We will prove $n^3 - n$ is divisible by 3 for every integer $n$ by cases. That is, for every $n$, $\exists$ a $k \in \mathbb{Z}$ such that $n^3 - n = 3k$. We will consider 3 cases: $n = 3p$, $n=3p+1$, and $n=3p+2$ for some integer $p$. By the quotient remainder theorem, we know that all integers $n$ must fall into one of these cases.
+
+**Case 1.** Let $n=3p$ for some integer $p$. Then 
+$$
+\begin{aligned}
+n^3 - n &= (3p)^3 - (3p) \\
+  &= 27p^3 - 3p \\
+  &= 3(9p^3 - p).
+\end{aligned}
+$$
+
+Let $9p^3 - p = k$. Since $p$ is an integer, $k$ is also an integer. So $n^3-n=3k$, and case 1 is true.
+
+**Case 2.** Let $n = 3p+1$ for some integer $p$. Then
+$$
+\begin{aligned}
+n^3 - n &= (3p+1)^3 - (3p+1)\\
+  &= (3p)^3 + 3(3p)^2 + 3(3p) + 1 - 3p - 1 \\
+  &= 27p^3 + 27p^2 + 9p + 1 - 3p -1 \\
+  &=27p^3 + 27p^2 + 6p \\
+  &=3(9p^3 + 9p^2 + 2p). \\
+\end{aligned}
+$$
+
+Let $9p^3 + 9p^2 + 2p = k$. Since $p$ is an integer, $k$ is also an integer. So $n^3-n=3k$, and case 2 is true. 
+
+**Case 3.** Let $n = 3p + 2$ for some integer $p$. Then
+$$
+\begin{aligned}
+n^3 - n &= (3p+2)^3 - (3p+2) \\
+  &= (3p)^3 + 3((3p)^2(2)) + 3(3p(2^2)) + 8 - 3p - 2 \\
+  &= 27p^3 + 54p^2 + 36p + 8 - 3p - 2 \\
+  &= 27p^3 + 54p^2 + 33p + 6 \\
+  &= 3(9p^3 + 18p^2 + 11p + 2). \\
+\end{aligned}
+$$
+
+Let $9p^3 + 18p^2 + 11p + 2 = k$. Since $p$ is an integer, $k$ is also an integer. So $n^3-n=3k$, and case 3 is true. 
+
+Since $n^3-n=3k$ for some integer $k$ in all cases, $n^3 - n$ is divisible by 3 for every integer $n$. $\blacksquare$ 
