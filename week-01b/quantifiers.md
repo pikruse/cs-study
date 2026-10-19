@@ -1,4 +1,4 @@
-# Quantifiers
+# Week 1b: Quantifiers
 
 ## Task 1:
 1. Write the following claims as $\forall n \geq \__, P(n)$, and write $P(n)$ in full with every variable introduced with a quantifier:

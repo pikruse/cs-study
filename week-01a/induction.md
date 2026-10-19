@@ -1,4 +1,4 @@
-# Week 1: Proof refresher
+# Week 1a: Proof refresher
 
 ## Task 1: Find the broken step
 
