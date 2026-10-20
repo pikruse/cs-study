@@ -7,14 +7,14 @@ def factor(n: int) -> list[int]:
     if n == 2:
         return [n]
 
-    # prime case: k+1 prime (try divisors d from 2 while d*d ≤ n)
     d = 2
     while d*d <= n:
         if n % d == 0:
-            # using the strong hypothesis: vals smaller than n are recursed upon
+            # using the strong hypothesis: vals smaller than n are recursed upon when n is composite
             return factor(d) + factor(n//d)
         else:
             d+=1 
+    # prime case: n is prime
     return [n]
 
 if __name__ == "__main__":
