@@ -81,37 +81,32 @@ Every integer $n \geq 8$ can be written as $n=3a+5b$ for some integers $a,b \geq
 
 **Predicate.** $P(n): n = 3a+5b$ for some integers $a,b \geq 0$.
 
-**Base Cases.**
-*Case 1.* $P(8): 8 = 3 \cdot 1 + 5 \cdot 1$.
+**Base Cases.** $P(8): 8 = 3 \cdot 1 + 5 \cdot 1$. $P(9): 9 = 3 \cdot 3 + 5 \cdot 0$. $P(10): 10 = 3 \cdot 0 + 5 \cdot 2$.
 
-*Case 2.* $P(9): 9 = 3 \cdot 3 + 5 \cdot 0$.
+**Inductive Hypothesis.** Fix $k \geq 10$, and assume $P(m)$ for every integer $m$ with $8 \leq m \leq k$.
 
-*Case 3.* $P(10): 10 = 3 \cdot 0 + 5 \cdot 2$.
-
-**Inductive Hypothesis.** Fix $k \geq 10$. Then for an integer $m$, where $8 \leq m \leq k$, $P(m)$ is true.
-
-**Inductive Step.** We begin with $P(k-2)$. Since $k \geq 10$, we know $8 \leq k-2 \leq k$. So, by the inductive hypothesis, we know
+**Inductive Step.** We begin with $P(k-2)$. Since $k \geq 10$, we know $8 \leq k-2 \leq k$. So, by the inductive hypothesis, $P(k-2)$ gives integers $a, b \geq 0$ with $k - 2 = 3a + 5b$. Adding one 3 to both sides,
 
 $$
 \begin{aligned}
 k-2 &= 3a + 5b \\
 k-2+3 &= 3a + 5b + 3\\
-k+1 &= 3(a+1) + 5b \\
+k+1 &= 3(a+1) + 5b. \\
 \end{aligned}
 $$
 
-Let $a' = a+1$ and $b' = b$. Since $a, b \geq 0$, $a', b'$ also $\geq 0$. So $k+1 = 3a' + 5b'$. Therefore, $P(k+1)$ is true.
+Let $a' = a+1$ and $b' = b$. These are integers, and since $a, b \geq 0$, $a', b' \geq 0$ as well. So $k+1 = 3a' + 5b'$. Therefore, $P(k+1)$ is true.
 
-**Conclusion.** So, by strong induction, we know there exist $a,b \geq 0$ such that $\forall n \geq 8$, $n = 3a+5b$. $\blacksquare$
+**Conclusion.** Since $P(8)$, $P(9)$, and $P(10)$ hold, and $P(k+1)$ follows for every $k \geq 10$, $P(n)$ holds for all $n \geq 8$ by strong induction. That is, $\forall n \geq 8$, $\exists$ integers $a, b \geq 0$ such that $n = 3a + 5b$. $\blacksquare$
 
 ---
 
 ## Task 5:
 Fibonacci numbers: $F(0) = 0, F(1) = 1$, and $F(n) = F(n-1) + F(n-2)$ for $n \geq 2$. For every integer $n \geq 0$, $F(n) < 2^n$.
 
-We will prove that $\forall n \in \mathbb{Z^+}$, $F(n) < 2^n$. 
+We will prove that $\forall n \geq 0$, $F(n) < 2^n$. 
 
-**Predicate** $P(n)$: $F(n) < 2^n$.
+**Predicate.** $P(n)$: $F(n) < 2^n$.
 
 **Base Cases.** $P(0)$: $F(0) = 0 < 2^0 = 1$, and $P(1)$: $F(1) = 1 < 2^1 = 2$.
 
@@ -134,7 +129,7 @@ $$
 
 So $F(k+1) < 2^{k+1}$, and $P(k+1)$ is true.
 
-**Conclusion.** Therefore, $\forall$ integers $n$, $F(n) < 2^n$. $\blacksquare$
+**Conclusion.** Since $P(0)$ and $P(1)$ hold, and $P(k+1)$ follows for every $k \geq 1$, $F(n) < 2^n$ for all integers $n \geq 0$ by strong induction. $\blacksquare$
 
 
 
