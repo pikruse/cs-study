@@ -20,7 +20,6 @@ def stamps(n):
     # inductive step: add one 3c stamp
     return (a + 1, b)
 
-
 if __name__ == "__main__":
     # check the claim: every n from 12 to 199 gets valid, nonnegative a and b
     for n in range(12, 200):
