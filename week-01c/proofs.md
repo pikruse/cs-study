@@ -131,5 +131,68 @@ So $F(k+1) < 2^{k+1}$, and $P(k+1)$ is true.
 
 **Conclusion.** Since $P(0)$ and $P(1)$ hold, and $P(k+1)$ follows for every $k \geq 1$, $F(n) < 2^n$ for all integers $n \geq 0$ by strong induction. $\blacksquare$
 
+--- 
+
+## Task 6:
+Let $W(n)$ be the number of ways to climb n steps. Prove by strong induction that $W(n) = W(n−1) + W(n−2)$ for every $n \geq 3$, with $W(1) = 1$ and $W(2) = 2$. Then show that your code returns $W(n)$.
+
+### Lemma 6.1:
+For all $n \geq 3$, $W(n) = W(n-1) + W(n-2)$.
+
+Let $W_n$ be the set of sequences of 1s and 2s that sum to $n$, so $W(n) = |W_n|$. Let $A$ be the sequences in $W_n$ starting with 1, and let $B$ be the sequences in $W_n$ starting with 2. Since $n \geq 1$, every sequence in $W_n$ is nonempty, so it has a first move, which is either 1 or 2, and never both. So $A$ and $B$ don't overlap and cover $W_n$, which gives $|W_n| = |A| + |B|$.
+
+First, we will show that there is a bijection between $A$ and $W_{n-1}$. Removing the leading $1$ from a sequence in $A$ leaves 1s and 2s that sum to $n-1$, so the result is a sequence in $W_{n-1}$. Adding a 1 in front of any sequence in $W_{n-1}$ gives a sequence in $A$. The two operations undo each other, so $|A| = W(n-1)$.
+
+Next, we will show that there is a bijection between $B$ and $W_{n-2}$. Since $n \geq 3$, $n - 2 \geq 1$, so removing the leading 2 from a sequence in $B$ leaves a nonempty sequence in $W_{n-2}$. The same argument as for $A$, with a leading 2, gives $|B| = W(n-2)$.
+
+Therefore, $W(n) = |A| + |B| = W(n-1) + W(n-2)$. $\blacksquare$
+
+### Proof 6.2
+For all $n \geq 1$, $\text{stairs}(n)$ returns $W(n)$.
+
+**Predicate.** $P(n): \text{stairs}(n)$ returns $W(n)$.
+
+**Base cases.** $P(1): \text{stairs}(1)$ returns $1 = W(1)$, so $P(1)$ is true. $P(2): \text{stairs}(2)$ returns $2 = W(2)$, so $P(2)$ is true.
+
+**Inductive hypothesis.** Fix $k \geq 2$, and assume $P(m)$ for every integer $m$ with $1 \leq m \leq k$.
+
+**Inductive step.** Since $k+1 \geq 3$, $\text{stairs}(k+1)$ returns $\text{stairs}(k) + \text{stairs}(k-1)$. Since $k \geq 2$, we have $1 \leq k-1 \leq k$, so $P(k)$ and $P(k-1)$ are both covered by the hypothesis. Since $k+1 \geq 3$, Lemma 6.1 applies to $n = k+1$. So
+
+$$
+\begin{aligned}
+\text{stairs}(k) + \text{stairs}(k-1) &= W(k) + W(k-1) && \text{by } P(k) \text{ and } P(k-1)\\
+&= W(k+1) && \text{by Lemma 6.1}
+\end{aligned}
+$$
+
+So $\text{stairs}(k+1)$ returns $W(k+1)$, and $P(k+1)$ holds.
+
+**Conclusion.** Since $P(1)$ and $P(2)$ hold, and $P(k+1)$ follows for every $k \geq 2$, $\text{stairs}(n)$ returns $W(n)$ for all $n \geq 1$ by strong induction. $\blacksquare$
+
+---
+
+## Review:
+1. **Hypothesis.** For the claim “$\forall n \geq 12, P(n)$” with base cases 12, 13 and 14, write the strong inductive hypothesis exactly. Include the range of $k$ and which $P(m)$ you assume. How does it differ from the ordinary induction hypothesis?
+   * The strong inductive hypothesis is: Fix $k \geq 14$, and assume $P(m)$ for every $12 \leq m \leq k$. This differs from the ordinary induction hypothesis because we're assuming *all* $m$ from the base case until $k$.
+ 
+2. **How many base cases?** Postage with 3¢ and 7¢ stamps needed three base cases, but product of primes needed only one. What decides how many base cases a strong induction proof needs?
+    * The number of base cases depends on how many values that the step can't produce. Postage looks back 3, so the first 3 values have nothing to look back to, and must be proven. Fibonacci looks back at most 2, so it needs 2 base cases. Primes looks back to factors that are at least 2, and primes need no look-back at all, so the step handles every value from 3 up, and only 2 needs a base case.
+
+3. **Where does k start?** In the Fibonacci bound, the base cases are $P(0)$ and $P(1)$, and the step proves $P(k + 1)$ from $P(k)$ and $P(k − 1)$. What’s the right lower bound for $k$? If you fix $k \geq 2$ instead, which value of $n$ goes unproven, and why?
+   * the right lower bound for $k$ is $k \geq 1$. If we fix $k \geq 2$, then $P(2)$ goes unproven (the case where $F(2) = F(1) + F(0)$), because the step's first result is $P(2+1) = P(3)$.
+   
+4. **Quantifier order.** What’s the difference between these two statements, and which one is true?
+   > a). $\forall n \geq 8, \exists$ integers $a, b \geq 0$ with $n = 3a + 5b$
+   > b). $\exists$ integers $a, b \geq 0$ such that $\forall n \geq 8, n = 3a + 5b$
+   * The statements are different because of their quantifier order. The first statement says that for all $n \geq 8$, there are *different* integers $a,b$ that satisfy the equation. The second statement presumes that the *same* integers $a,b$ satisfy the equation for all $n$. So the first statement is true.
+
+5. **Recursion vs iteration.** Your recursive stairs(n) and your LeetCode loop return the same values
+   - Which one is top-down, and which is bottom-up?
+    * The recursive function is top-down, because it starts at $n$ and works downward recursively, while the leetcode version is bottom-up, because it starts at the base cases (1 and 2) and works up to $n$.
+   - Why is the naive recursive version exponential?
+    * The recursive version of $n$ is exponential because as $n$ grows, the number of calls grows exponentially. Each call makes two more, and the same subproblems are recomputed. 
+   - What’s the difference between a recurrence and a recursive function?
+    * *Recurrence* is a mathematical concept where the result of a function depends on previous results of a function, like the fibonacci sequence: $F(n) = F(n-1) + F(n-2)$.
+    * *A recursive function* is a computer science concept where a function calls itself.
 
 
