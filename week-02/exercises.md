@@ -36,7 +36,7 @@ def f(xs):
     return total
 ```
 
-The Big-O of this function is $O(n^2)$. First, we define $T(n)$. There's one variable assignment outside the loop (1). The inner loop runs $n-i$ times for each $i$, so the body runs $n + (n-1) + \cdots + 1 = n(n+1)/2$ times, giving $T(n) = \frac{n(n+1)}{2)+1. The $n^2$ term dominates as $n \rightarrow \infty$, so the function is $O(n^2)$.
+The Big-O of this function is $O(n^2)$. First, we define $T(n)$. There's one variable assignment outside the loop (1). The inner loop runs $n-i$ times for each $i$, so the body runs $n + (n-1) + \cdots + 1 = n(n+1)/2$ times, giving $T(n) = \frac{n(n+1)}{2} + 1$. The $n^2$ term dominates as $n \rightarrow \infty$, so the function is $O(n^2)$.
 
 
 ### Proof 1.3:
@@ -79,23 +79,44 @@ def h(xs):                       # C
     return seen
 ```
 
-To find the worst case, we must ask if $n$ is fixed, then which input of that size takes the longest?
+**A:** To find the worst case, fix $n$, then ask which input of that size takes the longest. In A, `xs` is a list. We begin with an assignment (1 operation), then the outer loop runs `i` over `xs`. For each `i`, the inner loop runs `j` from `i` to $n-1$, so the loop body runs $n + (n-1) + \cdots + 2 + 1 = \frac{n(n+1)}{2}$ times in total. Nothing depends on the values in `xs`, so all inputs of the same size do the same work, and the best case equals the worst case. Within the loop body, we perform two indexes and an assignment. The `list` datatype in Python indexes in $O(1)$, so even in the worst case (`i, j` at the end of the list) indexing still takes one operation. So each run of the loop body takes 3 operations. Therefore
 
-**A:**  
+$$
+\begin{aligned}
+T(n) &= 3 \frac{n(n+1)}{2} + 1 \\
+    &= \frac{3n^2 + 3n}{2} + 1 \\
+\end{aligned}
+$$
 
-**B:** 
+The $n^2$ term dominates, so the worst-case performance is $\Theta(n^2)$.
 
-**C:** 
+*In one line:* Every input of size $n$ runs the loop body $\frac{n(n+1)}{2}$ times, so the worst case is $\Theta(n^2)$.
+
+**B:** In B, the only input is the integer `n`, so for a given `n` there is exactly one input, and the best case equals the worst case. The first line has 2 assignments. Then the loop checks whether `i < n`, and if so, doubles `i` and increments `c`. After $k$ passes, $i = 2^k$, so the loop stops at the first $k$ with $2^k \geq n$, which is $k = \lceil \log_2 n \rceil$ passes. In other words, each time `n` doubles, `i` doubles one more time, so the loop runs one more pass. The runtime therefore grows sublinearly: $T(n)/n$ shrinks as `n` grows. Each pass does a check and two assignments, and the loop ends with one final failing check, so $T(n) = 3\lceil \log_2 n \rceil + 3$.
+
+*In one line:* `i` doubles each pass until it reaches `n`, so the loop runs $\lceil \log_2 n \rceil$ times, and the worst case is $\Theta(\log n)$.
+
+**C:** In C, the input is a list `xs`. The check `x not in seen` is a hidden loop: list membership scans `seen` until it finds `x`. The worst case is when all elements of `xs` are distinct (in any order), because then `x` is never found, so every check scans all of `seen`, and `seen` grows by one each time. There is 1 assignment on line 1, and the for loop runs $n$ times. When the $k$-th element is checked, `seen` holds the $k-1$ elements before it, so the scans cost $0 + 1 + 2 + \cdots + (n-1) = \frac{n(n-1)}{2}$ comparisons in total, one comparison per element of `seen`. Each new `x` is also appended once, which adds $n$ operations. So $T(n) = \frac{n(n-1)}{2} + n + 1$, and the worst case is $\Theta(n^2)$.
+
+*In one line:* If all elements are distinct, each `x not in seen` scans all of `seen`, which grows to $n-1$ elements, so the hidden loop inside `in` makes the code act like two nested loops, and the worst case is $\Theta(n^2)$.
 
 ### Question 2.2:
-Write the best-case $T(n)$ and the worst-case $T(n)$ separately (which inputs give each?), then a $\Theta$ for each. Is "$h$ is $O(n^2) on every input" true? Is "$h$ is $\Omega(n^2)$ on every input" true?
+Write the best-case $T(n)$ and the worst-case $T(n)$ separately (which inputs give each?), then a $\Theta$ for each. Is "$h$ is $O(n^2)$ on every input" true? Is "$h$ is $\Omega(n^2)$ on every input" true?
+
+* As defined in Question 2.1.C, the worst-case scenario is $T(n) = \frac{n(n-1)}{2} + n + 1$. However, the best-case scenario occurs when all values of `xs` are the same, because then `seen` never holds more than one element, so each scan is a single comparison. Counting the same way as the worst case: the first `x` scans an empty `seen` (0 comparisons) and is appended once, and each of the other $n-1$ checks makes 1 comparison and finds `x`. Therefore, the best-case $T(n) = (n-1) + 1 + 1 = n + 1$.
+
+* The worst case is $\Theta(n^2)$, while the best case is $\Theta(n)$.
+
+* "$h$ is $O(n^2)$ on every input" is true. $O$ is an upper bound, and every input takes at most as many steps as the worst case, which is at most $c \cdot n^2$ for all $n \geq n_0$. So every input is too.
+
+* "$h$ is $\Omega(n^2)$ on every input" is false, because $\Omega$ is a lower bound, and the best-case input (all values the same) takes only $n + 1$ steps, which falls below $c \cdot n^2$ for any fixed $c > 0$ once $n$ is large enough.
 
 ---
 
 ## Task 3: 
 
 ### Question 3.1
-Say which case each "column" measures in `membership.py`. Then take the worst case as $T(n) = 2n+3$ and prove
+Say which case each "column" measures in `timing.py`. Then take the worst case as $T(n) = 2n+3$ and prove
 
 #### Lemma 3.1.1
 $T(n) = O(n)$: there exist $c > 0$ and $n_0$ such that $T(n) \leq c \cdot n$ for all $n \geq n_0$
