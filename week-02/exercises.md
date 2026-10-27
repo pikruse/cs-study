@@ -113,21 +113,54 @@ Write the best-case $T(n)$ and the worst-case $T(n)$ separately (which inputs gi
 
 ---
 
-## Task 3: 
+## Task 3:
 
 ### Question 3.1
 Say which case each "column" measures in `timing.py`. Then take the worst case as $T(n) = 2n+3$ and prove
 
+* For the list, the worst case is `-1 in container`, since it's not found, and the entire list must be checked.
+
+* For the list, the best case is `0 in container`, since it's the very first item checked.
+
+* For the set and dict columns, `-1` is an ordinary lookup (the average case), not a worst case.
+
 #### Lemma 3.1.1
-$T(n) = O(n)$: there exist $c > 0$ and $n_0$ such that $T(n) \leq c \cdot n$ for all $n \geq n_0$
+*Scratch work (finding $c$):* we need $2 + \frac{3}{n} \leq c$, and $\frac{3}{n} \leq 3$ for $n \geq 1$, so $c = 5$ works.
+
+**Proof.** We show $T(n) = O(n)$. Let $c = 5$ and $n_0 = 1$. For all $n \geq 1$, $3 \leq 3n$, so $T(n) = 2n + 3 \leq 2n + 3n = 5n$. So $T(n) \leq c \cdot n$ for all $n \geq n_0$, and by definition $T(n) = O(n)$. $\blacksquare$
 
 #### Lemma 3.1.2
-$T(n) = \Omega(n)$ (Lower bound)
+*Scratch work (finding $c$):* we need $c \leq 2 + \frac{3}{n}$, and $2 \leq 2 + \frac{3}{n}$ for every $n \geq 1$, so $c = 2$ works.
 
-#### Proof 3.1.3 
-$T(n) = \Theta(n)$ (Tight bound)
+**Proof.** We show $T(n) = \Omega(n)$. Let $c = 2$ and $n_0 = 1$. For all $n \geq 1$, $2n \leq 2n + 3 = T(n)$, since $3 > 0$. So $T(n) \geq c \cdot n$ for all $n \geq n_0$, and by definition $T(n) = \Omega(n)$. $\blacksquare$
 
-### Question 3.2:
-Prove that $n^2$ is not $O(n)$ by contradiction.
+#### Proof 3.1.3
+We show $T(n) = \Theta(n)$. By Lemma 3.1.1, $T(n) \leq 5n$ for all $n \geq 1$, and by Lemma 3.1.2, $2n \leq T(n)$ for all $n \geq 1$. Let $c_1 = 2$, $c_2 = 5$ and $n_0 = \max(1, 1) = 1$, so that both bounds hold. Then $c_1 n \leq T(n) \leq c_2 n$ for all $n \geq n_0$, and by definition $T(n) = \Theta(n)$. $\blacksquare$
 
-### Question
+### Question 3.2
+Covered by Proof 1.3.
+
+---
+
+## Task 4:
+
+### Question 4.1:
+Given a list of integers, return `True` if any value appears at least twice, and `False` if every value is distinct. 
+1. Write your approach and its big O.
+    * Make a set called `seen` to track the seen integers
+    * Loop through the input list
+      * Within the loop, check if each item is in seen (O(1))
+        * If seen, return `True`
+        * If not seen, add the item to the list
+    * Upon the loop's completion, return `False`
+
+2. Note one alternative approach and its big O.
+   * It would also be possible to sort the list and check if any pairs of adjacent indices are equal.
+
+3. Which input of size $n$ is the worst case? Which is the best case?
+   * The worst case is a completely distinct list
+   * The best case is a list with two starting entries that are the same
+
+4. What's the $\Theta$ of each case?
+   * The worst case is $\Theta(n)$. Since `x in set` is O(1), there's only a single loop `n` times, and everything else is constant runtime.
+   * The best case is actually $\Theta(1)$. In this case, the loop only goes through a single iteration, so it essentially acts as a single assignment.
