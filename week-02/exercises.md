@@ -164,3 +164,47 @@ Given a list of integers, return `True` if any value appears at least twice, and
 4. What's the $\Theta$ of each case?
    * The worst case is $\Theta(n)$. Since `x in set` is O(1), there's only a single loop `n` times, and everything else is constant runtime.
    * The best case is actually $\Theta(1)$. In this case, the loop only goes through a single iteration, so it essentially acts as a single assignment.
+
+---
+
+## Review 5:
+
+### Question 5.1:
+How many times does this loop body run, as an exact expression in $n$? What is its $\Theta$? Does it matter whether you call this the best or worst case?
+```{python}
+for i in range(n):
+    for j in range(i):
+        total += 1
+```
+* For each `i`, the inner loop runs `i` times. Since `i` goes from 0 to $n-1$, the body runs $0 + 1 + \cdots + (n-1)$ times. So $T(n) = \frac{n(n-1)}{2}$.
+
+* The loop is $\Theta(n^2)$. It doesn't matter if this is the best or worst case, since the number of operations doesn't vary by cases (no branching or varied list items).
+
+### Question 5.2:
+Prove that $4n^2 - 3n + 10$ is $O(n^2)$. 
+
+Let $c = 11$ and $n_0 = 1$. We know that for $n \geq 1$, $n^2 \geq n$, so $\frac{10}{n^2} \leq \frac{10}{n}$, and $-\frac{3}{n} + \frac{10}{n^2} \leq -\frac{3}{n} + \frac{10}{n} = \frac{7}{n} \leq 7$. So $4 -\frac{3}{n} + \frac{10}{n^2} \leq 4 + 7 = 11$ for all $n \geq 1$. So 
+
+$$
+\begin{aligned}
+4 -\frac{3}{n} + \frac{10}{n^2} &\leq 11 \\
+4n^2 - 3n + 10 &\leq 11n^2. && \text{Multiplying by } n^2 > 0.\\
+\end{aligned}
+$$
+
+Therefore there exist $c > 0$ and $n_0$ such that $4n^2 - 3n + 10 \leq cn^2$ for all $n \geq n_0$. So by definition, $4n^2 - 3n + 10$ is $O(n^2)$. $\blacksquare$
+
+### Question 5.3:
+Prove that $2^n$ is not $O(n)$ by contradiction.
+
+* Negation: $\forall c > 0, \forall n_0, \exists n \geq n_0$ such that $2^n > cn$.
+
+* Proof: First, we assume that $2^n = O(n)$. So let $c > 0$ and $n_0$ be constants such that $2^n \leq cn$ for all $n \geq n_0$. We know $2^n \geq n^2$ when $n \geq 4$. Additionally, we know $n^2 > cn$ when $n > c$. So together, $2^n \geq n^2 > cn$ when $n \geq 4$ and $n > c$. Let $n = \max(n_0, 4, \lceil c \rceil + 1)$. Under these conditions, $n \geq 4$ and $n > c$, so $2^n > cn$. However, $n \geq n_0$, and we assumed that $2^n \leq cn$ for all $n \geq n_0$; this is a contradiction, so $2^n$ is not $O(n)$. $\blacksquare$
+
+### Question 5.4:
+Write the hypothesis for "every $n \geq 8$ is $3a +5b$ with integers $a,b \geq 0$", using base cases 8, 9, and 10. 
+* Fix $k \geq 10$. Then for every integer $m$ with $8 \leq m \leq k$, assume $P(m)$.
+
+### Question 5.5:
+A strong induction proof about `stairs(n)` has base cases $n=1$ and $n=2$, and proves $P(k+1)$ from $P(k)$ and $P(k-1)$. What goes wrong if you fix $k \geq 1$ instead of $k \geq 2$?
+* If you fix $k \geq 1$, then the step for $k = 1$ has to prove $P(2)$ from $P(1)$ and $P(0)$. But $P(0)$ is outside the claim's range ($n \geq 1$) and is not a base case, so the hypothesis doesn't give it to us, and the proof doesn't hold.
