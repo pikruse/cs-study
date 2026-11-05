@@ -6,6 +6,7 @@ def binary_search(xs, target) -> int:
 
     return
 
+
 def contains(xs, t):
     xs.sort()
     return binary_search(xs, t) != -1
