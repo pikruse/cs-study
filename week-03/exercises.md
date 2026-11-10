@@ -24,3 +24,31 @@ Note the lengths where the size jumps. CPython grows the list by about 1/8 plus 
 * If CPython grows the list by 1/8 plus a few slots, then each copy adds at least 1.125 times the slots. so working backwards, the resizes add $n, \frac{n}{1.125}, \frac{n}{1.125^2}, \dots$ items. Since this is a geometric series, just like the $2n$ version, it still amortizes to O(1).
 
 * If the list grew by a fixed 100 slots, then each successive copy would add $100, 200, \dots n$ items, which grows quadratically (just like $1 + 2 + \cdots + n$). So per append, this amortizes to $\Theta(n)$ instead of O(1).
+
+---
+
+## Review:
+### Question 2.1:
+A dynamic array starts at capacity 4 and triples whenever it’s full. How many item copies do the first 40 appends cause in total, and how many is that per append? Is append amortized $O(1)$?
+
+### Question 2.2:
+Someone says “append is $O(1)$ on average, because most appends are cheap.” What’s wrong with using the word “average” here? What does “amortized $O(1)$” actually guarantee, and can a single append still be slow?
+
+### Question 2.3:
+Your loop keeps “if `target` is in `xs`, its index is in `[lo, hi]`” and runs while `lo <= hi`.
+    (a) When `xs[mid] < target`, why is `lo = mid + 1` correct?
+    (b) What goes wrong with `lo = mid`?
+    (c) In the worst case, how many passes does the loop make for `n = 1,000,000`?
+
+### Question 2.4
+Give $T(n)$, the exact number of times `body()` runs when $n=2^k$, and its $\Theta$:
+```{python}
+i = 1
+while i < n:
+    for j in range(i):
+        body()
+    i *= 2
+```
+* $T(n) = 1 + \log_2 n$
+* `body()` runs ___ times when $n=2^k$
+* $\Theta$
