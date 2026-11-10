@@ -13,7 +13,31 @@ class Solution:
             for idx2 in range(idx1+1, len(nums)):
                 if num1 + nums[idx2] == target:
                     return [idx1, idx2]
+                
+    def binary_search(self, xs, target, lo=0) -> int:
+        """binary search helper function: does target-value exist?"""
+        lo, hi = 0, len(xs) - 1
+        # invariant: if the target is in xs, its index is in [lo, hi]
+        while lo <= hi:
+            mid = (lo + hi) // 2
+            if target == xs[mid]:
+                return mid
+            elif target > xs[mid]:
+                lo = mid + 1
+            else:
+                hi = mid - 1 
+        return -1
 
+    def binaryTwoSum(self, nums: list[int], target:int) -> list[int]:
+        """a twosum version that sorts and then uses binary search to find the complement"""
+
+        # sort the pairs to get value, original index
+        pairs = sorted((v, i) for i, v in enumerate(nums)) 
+        vals = [v for v, _ in pairs]
+        for i in range(len(vals)):
+            j = self.binary_search(vals, target-vals[i], lo=i+1)
+            if j != -1 and j != i:
+                return [pairs[i][1], pairs[j][1]]
 
 def is_valid(nums: list[int], target: int, answer: list[int]) -> bool:
     """an answer is valid if it names two different positions summing to target"""
@@ -37,6 +61,7 @@ if __name__ == "__main__":
     # hash map in Week 7), and every one gets checked against the same cases
     solutions = [
         ("naive", sol.myTwoSum),
+        ("binary", sol.binaryTwoSum),
     ]
     for name, func in solutions:
         for nums, target in cases:
@@ -45,10 +70,7 @@ if __name__ == "__main__":
             assert is_valid(original, target, answer), (name, original, target, answer)
             assert nums == original, f"{name} changed its input list"
         print(f"{name}: all {len(cases)} tests passed")
-
-
-    
-    
+ 
 """
 approach:
     I used the naive approach here:

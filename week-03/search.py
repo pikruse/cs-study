@@ -1,7 +1,6 @@
 """search.py"""
 
-# if target is in xs, its index is in lo, hi
-# 
+# if target is in xs, its index is in lo, hi 
 def binary_search(xs, target) -> int:
     """returns index of target in the sorted list xs, or -1 if not found"""
     lo, hi = 0, len(xs) - 1
